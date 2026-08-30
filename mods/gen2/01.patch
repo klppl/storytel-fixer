@@ -1,0 +1,56 @@
+diff -Naur diff_src/default.prop diff_dst/default.prop
+--- diff_src/default.prop	2026-08-30 18:43:01.252981197 +0200
++++ diff_dst/default.prop	2026-08-30 18:43:01.260147744 +0200
+@@ -21,3 +21,4 @@
+ persist.sys.usb.config=none
+ 
+ ro.adb.secure=0
++service.adb.root=1
+diff -Naur diff_src/init.rc diff_dst/init.rc
+--- diff_src/init.rc	2026-08-30 18:43:01.253981732 +0200
++++ diff_dst/init.rc	2026-08-30 18:43:01.261383698 +0200
+@@ -214,6 +214,19 @@
+     setprop persist.service.adb.enable 1
+     setprop persist.service.debuggable 1
+     setprop persist.sys.usb.config mtp,adb
++    setprop sys.onyx.idledelay 300000
++    setprop ro.radio.noril 1
++    setprop wifi.supplicant_scan_interval 180
++    setprop ro.storytel.wifi.autoclose false
++    setprop ro.storytel.bluetooth.autoclose false
++    setprop dalvik.vm.heapgrowthlimit 128m
++    setprop dalvik.vm.heapsize 256m
++    # VM / zRAM / I/O tuning
++    write /proc/sys/vm/swappiness 100
++    write /proc/sys/vm/page-cluster 0
++    write /proc/sys/vm/vfs_cache_pressure 50
++    write /proc/sys/vm/dirty_ratio 10
++    write /proc/sys/vm/dirty_background_ratio 5
+ 
+ on load_persist_props_action
+     load_persist_props
+diff -Naur diff_src/init.rk30board.rc diff_dst/init.rk30board.rc
+--- diff_src/init.rk30board.rc	2026-08-30 18:43:01.258787527 +0200
++++ diff_dst/init.rk30board.rc	2026-08-30 18:43:01.262710707 +0200
+@@ -126,15 +126,18 @@
+ 
+ # cpu min freq must change to 126M when boot completed
+ on property:sys.boot_completed=1
++    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 30000
++    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1008000
++    write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
+     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
+     setprop persist.sys.first_booting false
+     # if data is encrypt, when start gps too early, gpsd crashed
+-    start gpsd
++    #start gpsd
+ 
+ # for telephony function
+ on property:ro.boot.baseband=N/A
+-    setprop ro.radio.noril false
+-    start ril-daemon
++    setprop ro.radio.noril 1
++    #start ril-daemon
+ 
+ # set ro.serialno
+ on property:sys.serialno=*
