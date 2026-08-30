@@ -103,4 +103,4 @@ adb install KOReader.apk
 
 ## License
 
-Open source under standard MIT / AOSP / Rockchip tool licensing where applicable.
+Licensed under the **LAGOM License (v2)**. See [LICENSE](LICENSE) for details.
