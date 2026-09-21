@@ -32,13 +32,15 @@ diff -Naur diff_src/init.rc diff_dst/init.rc
 diff -Naur diff_src/init.rk30board.rc diff_dst/init.rk30board.rc
 --- diff_src/init.rk30board.rc	2026-08-30 18:43:01.258787527 +0200
 +++ diff_dst/init.rk30board.rc	2026-08-30 18:43:01.262710707 +0200
-@@ -126,15 +126,18 @@
+@@ -126,15 +126,20 @@
  
  # cpu min freq must change to 126M when boot completed
  on property:sys.boot_completed=1
 +    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 30000
 +    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1008000
 +    write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
++    # Disable the faulty magnetic-cover sensor without affecting power/page keys.
++    write /sys/bus/platform/drivers/axp22x-hall/unbind axp22x-hall
      write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
      setprop persist.sys.first_booting false
      # if data is encrypt, when start gps too early, gpsd crashed

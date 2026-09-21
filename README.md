@@ -17,7 +17,7 @@ Chances are, someone else is out there right now dealing with a buggy Storytel r
 ## Features
 
 - **ADB & Root Access**: Enables ADB by default, disables ADB authorization popups, and includes Magisk root support.
-- **Sleep & Standby Fix**: Resolves sleep/wake issues by enforcing a reliable 5-minute idle standby delay (`sys.onyx.idledelay 300000`).
+- **Sleep & Standby Fix**: Enforces a reliable 5-minute idle standby delay (`sys.onyx.idledelay 300000`) and, on Gen 2, disables the faulty magnetic-cover sensor that can immediately wake the reader again.
 - **Memory & Swap Optimization**: Tunes zRAM swapping, single-page clustering, and directory caching for 1GB RAM hardware.
 - **Power & Radio Fixes**: Disables cellular radio crash loops (`ril-daemon`) and background GPS daemons; optimizes Wi-Fi scan intervals.
 - **Network Keepalive**: Prevents aggressive background termination of Wi-Fi and Bluetooth connections.
