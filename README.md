@@ -1,5 +1,7 @@
 # Storytel Reader Fixer (`storytel-fixer`)
 
+[![License: Lagom](https://img.shields.io/badge/license-lagom-9E2B25)](https://klppl.github.io/lagom-license/)
+
 Utilities and ramdisk patches for unlocking, rooting, and optimizing the Storytel Reader (1st and 2nd generation).
 
 ---
